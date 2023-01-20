@@ -2,6 +2,7 @@ const experss = require("express");
 const app = new experss();
 var ip = require('ip');
 const notifier = require('node-notifier');
+const open = require('open');
 
 const port = 8000;
 
@@ -17,4 +18,16 @@ app.get('/setup', (req, res) => {
 
 app.listen(port, () => {
   console.log(`MobileControll server running on: http://${ip.address()}:${port}`)
+  notifier.notify({
+    title: "MobileControll",
+    message: `running on: http://${ip.address()}:${port}`,
+    actions: ['open setup', 'open']
+  })
 })
+
+notifier.on('open setup', () => {
+  open(`http://${ip.address()}:${port}/setup`)
+});
+notifier.on('open', () => {
+  open(`http://${ip.address()}:${port}`)
+});
