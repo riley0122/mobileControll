@@ -1,0 +1,19 @@
+{
+  "name": "mobile-controll",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasammer/mobileControll.git"
+  },
+  "author": "LucasAmmer",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/lucasammer/mobileControll/issues"
+  },
+  "homepage": "https://github.com/lucasammer/mobileControll#readme"
+}
