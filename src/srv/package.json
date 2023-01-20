@@ -2,9 +2,9 @@
   "name": "mobile-controll",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "clnt/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/lucasammer/mobileControll/issues"
   },
-  "homepage": "https://github.com/lucasammer/mobileControll#readme"
+  "homepage": "https://github.com/lucasammer/mobileControll#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ip": "^1.1.8"
+  }
 }
