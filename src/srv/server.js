@@ -4,8 +4,10 @@ var ip = require('ip');
 
 const port = 8000;
 
+app.use(experss.static('public'))
+
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.sendFile(__dirname + "\\clnt\\index.html");
 })
 
 app.listen(port, () => {
