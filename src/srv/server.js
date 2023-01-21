@@ -8,7 +8,7 @@ const app = new experss();                               // Initialises express
 
 const { port } = require('./config/ServerConfig.json');  // Get the port from the server config
 
-app.use('/static', experss.static('public'))             // Includes the public folder
+app.use(experss.static('public'))                        // Includes the public folder
 
 // standard pages
 
