@@ -1,9 +1,25 @@
+class action{
+    constructor(name="", func=() => {}){
+        this.isaction = true;
+        this.name = name;
+        this.func = func;
+    }
+}
+
 function reset() {
     document.cookie = ""; 
 }
 
-function saveSettings() {
-    
+function callEndpoint(endpoint) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            let response = this.responseText;
+            return response;
+        }
+    };
+    xhttp.open("GET", `${window.document.location.hostname}/endpoint`, true);
+    xhttp.send();
 }
 
 // get and set cookies from w3schools cuz i'm too lazy to write myself
