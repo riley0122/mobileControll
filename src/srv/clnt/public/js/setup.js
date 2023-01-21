@@ -2,6 +2,10 @@ function reset() {
     document.cookie = ""; 
 }
 
+function saveSettings() {
+    
+}
+
 // get and set cookies from w3schools cuz i'm too lazy to write myself
 function setCookie(cname, cvalue, exdays) {
     const d = new Date();
