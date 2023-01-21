@@ -1,4 +1,4 @@
-const experss = require("express");
+const experss = require("express");                      // WATCH OUT express is misspelled
 var ip = require('ip');
 const notifier = require('node-notifier');
 const open = require('open');                            // Package for opening URL's
@@ -8,7 +8,7 @@ const app = new experss();                               // Initialises express
 
 const { port } = require('./config/ServerConfig.json');  // Get the port from the server config
 
-app.use(experss.static('public'))                        // Includes the public folder
+app.use('/static', experss.static('public'))             // Includes the public folder
 
 // standard pages
 
