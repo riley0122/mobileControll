@@ -8,7 +8,7 @@ const app = new experss();                               // Initialises express
 
 const { port } = require('./config/ServerConfig.json');  // Get the port from the server config
 
-app.use(experss.static('public'))                        // Includes the public folder
+app.use(experss.static(__dirname + '/public'));          // Includes the public folder
 
 // standard pages
 
@@ -75,7 +75,7 @@ app.listen(port, () => {
   notifier.notify({                                        // Create a notification with the ip and port with the buttons to open setup and to open the page
     title: "MobileControll",
     message: `running on: http://${ip.address()}:${port}`,
-    actions: ['open setup', 'open']
+    actions: ['open setup', 'open', 'Generate QR']
   })
 })
 
@@ -84,4 +84,8 @@ notifier.on('open setup', () => {                         // When the button to 
 });
 notifier.on('open', () => {
   open(`http://${ip.address()}:${port}`)                  // When the open buttin is pressed it opens the site
+});
+notifier.on('Generate QR', () => {
+  const data = `http://${ip.address()}:${port}`                  // Save the ip and port as data
+  open(`https://api.qrserver.com/v1/create-qr-code/?data=${data}&amp;size=100x100`)   // generate a qr code and show it
 });
