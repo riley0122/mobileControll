@@ -1,14 +1,14 @@
-const experss = require("express");
+const express = require("express");
 var ip = require('ip');
 const notifier = require('node-notifier');
 const open = require('open');                            // Package for opening URL's
 const fs = require("fs");     
 
-const app = new experss();                               // Initialises express
+const app = new express();                               // Initialises express
 
 const { port } = require('./config/ServerConfig.json');  // Get the port from the server config
 
-app.use(experss.static('public'))                        // Includes the public folder
+app.use(express.static('public'))                        // Includes the public folder
 
 // standard pages
 
