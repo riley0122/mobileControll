@@ -1,2 +1,1 @@
-# mobileControll
-With mobileControll you can controll your computer from any device.
+ok so now you've read it good job go do something with your life now.
