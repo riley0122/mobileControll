@@ -2,13 +2,14 @@ const express = require("express");
 var ip = require('ip');
 const notifier = require('node-notifier');
 const open = require('open');                            // Package for opening URL's
-const fs = require("fs");     
+const fs = require("fs");   
+const path = require("path")  
 
 const app = new express();                               // Initialises express
 
 const { port } = require('./config/ServerConfig.json');  // Get the port from the server config
 
-app.use(express.static(__dirname + '/public'));          // Includes the public folder
+app.use('', express.static(path.join(__dirname, '/clnt/public')))         // Includes the public folder
 
 
 // standard pages
