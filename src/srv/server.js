@@ -15,11 +15,11 @@ app.use('', express.static(path.join(__dirname, '/clnt/public')))         // Inc
 // standard pages
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + "\\clnt\\index.html");        // Sends the index file on the main page
+  res.sendFile(__dirname + "/clnt/index.html");        // Sends the index file on the main page
 })
 
 app.get('/setup', (req, res) => {
-  res.sendFile(__dirname + "\\clnt\\setup.html");        // Sends the setup page on the main page
+  res.sendFile(__dirname + "/clnt/setup.html");        // Sends the setup page on the main page
 })
 
 // saving settings in a file
