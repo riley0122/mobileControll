@@ -6,19 +6,27 @@ class action{
     }
 }
 
-function reset() {
-    document.cookie = ""; 
+const newAction = () => {
+    const name = document.getElementById("action_name").value;
+    const func = eval(document.getElementById("action_func").value)
+
+    const checkExists = (res)=>{
+        if(res.hasOwnProperty(name)){
+            return console.error("action already exists with that name!")
+        }
+    }
+    callEndpoint("api?action=getAll", checkExists);
 }
 
-function callEndpoint(endpoint) {
+function callEndpoint(endpoint, _callback=()=>{}) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let response = this.responseText;
-            return response;
+            _callback(response)
         }
     };
-    xhttp.open("GET", `${window.document.location.hostname}/${endpoint}`, false);
+    xhttp.open("GET", `${window.location.origin}/${endpoint}`, true);
     xhttp.send();
 }
 
