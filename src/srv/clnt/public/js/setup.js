@@ -6,24 +6,42 @@ class action{
     }
 }
 
-function reset() {
-    document.cookie = ""; 
+const newAction = () => {
+    console.log("getting")
+    const name = document.getElementById("action_name").value;
+    const func = eval(document.getElementById("action_func").value)
+
+    const obj = new action(name, func);                                     // Create an object
+
+    const log = (res) => {
+        console.log(res)
+    }
+
+    const checkExists = (res)=>{
+        console.log(res)
+        if(res.hasOwnProperty(name)){
+            return console.error("action already exists with that name!")   // If another function already exists dont create a new one
+        }
+        callEndpoint(`api?action=set&key=${name}&value=${obj.func.toString()}`, log);
+    }
+
+    callEndpoint("api?action=getAll", checkExists);
 }
 
-function callEndpoint(endpoint) {
+function callEndpoint(endpoint, _callback=()=>{}){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            let response = this.responseText;
-            return response;
+    xhttp.onreadystatechange = () => {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            let response = xhttp.responseText;
+            _callback(response)
         }
     };
-    xhttp.open("GET", `${window.document.location.hostname}/endpoint`, true);
+    xhttp.open("GET", `${window.location.origin}/${endpoint}`, true);
     xhttp.send();
 }
 
 
-function covertObjectToBinary(obj) {
+const covertObjectToBinary = (obj) => {
     let output = '',
         input = JSON.stringify(obj) // convert the json to string.
     // loop over the string and convert each charater to binary string.
@@ -33,7 +51,7 @@ function covertObjectToBinary(obj) {
     return output.trimEnd();
 }
   
-function convertBinaryToObject(str) {
+const convertBinaryToObject = (str) => {
     var newBin = str.split(" ");
     var binCode = [];
     for (i = 0; i < newBin.length; i++) {
@@ -43,13 +61,13 @@ function convertBinaryToObject(str) {
     return JSON.parse(jsonString)
 }
   
-function objectToBase64(obj){
+const objectToBase64 = (obj) => {
     let bin = covertObjectToBinary(obj);
     let enc = btoa(bin)
     return enc;
 }
   
-function base64ToObject(str){
+const base64ToObject = (str) => {
     let bin = atob(str)
     let obj = convertBinaryToObject(bin);
     return obj;
