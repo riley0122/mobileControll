@@ -18,7 +18,7 @@ function callEndpoint(endpoint) {
             return response;
         }
     };
-    xhttp.open("GET", `${window.document.location.hostname}/endpoint`, true);
+    xhttp.open("GET", `${window.document.location.hostname}/${endpoint}`, true);
     xhttp.send();
 }
 
