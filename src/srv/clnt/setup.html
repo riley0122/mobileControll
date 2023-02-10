@@ -10,9 +10,13 @@
 <body>
     <h1>MobileControll setup</h1>
     <hr>
-    <button onclick="reset()">reset all settings</button>
     <br>
     <h5>Create new action</h5>
+    <input class="in" id="action_name" name="name" placeholder="name"></input>
+    <br>
+    <textarea class="in" id="action_func" name="func" placeholder="() => {
+	console.log('Hello, World!');
+}"></textarea>
 
     <!-- import scripts -->
     <script src="js/setup.js"></script>
