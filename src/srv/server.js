@@ -102,8 +102,10 @@ app.listen(port, () => {
   notifier.notify({                                        // Create a notification with the ip and port with the buttons to open setup and to open the page
     title: "MobileControll",
     message: `running on: http://${ip.address()}:${port}`,
-    actions: ['open setup', 'open', 'Generate QR']
+    actions: ['open setup', 'open',]
   })
+  const data = `http://${ip.address()}:${port}`                  // Save the ip and port as data
+  open(`https://api.qrserver.com/v1/create-qr-code/?data=${data}&amp;size=100x100`)   // generate a qr code and show it
 })
 
 notifier.on('open setup', () => {                         // When the button to open setup is pressed it opens the server on the setup page
@@ -111,10 +113,6 @@ notifier.on('open setup', () => {                         // When the button to 
 });
 notifier.on('open', () => {
   open(`http://${ip.address()}:${port}`)                  // When the open buttin is pressed it opens the site
-});
-notifier.on('Generate QR', () => {
-  const data = `http://${ip.address()}:${port}`                  // Save the ip and port as data
-  open(`https://api.qrserver.com/v1/create-qr-code/?data=${data}&amp;size=100x100`)   // generate a qr code and show it
 });
 
 function covertObjectToBinary(obj) {
