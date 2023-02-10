@@ -66,6 +66,22 @@ app.get('/api', async(req, res) => {
         res.send(JSON.parse('{"error":"missing/invalid arguements"}'));
        }
     break;
+
+    case "run":
+       if(req.query.key!=""){                            // Check if key is set
+        if (fs.existsSync(path)) {
+          fs.readFile(path, 'utf-8', (e, data) => {
+            
+          })
+        }else{
+          fs.writeFile(path, '{"error":"file doesnt exist"}', (e) => {  // If the file doesn't exist dont do anything
+            if(e) throw e;
+          })
+        }
+       }else{
+        res.send(JSON.parse('{"error":"missing/invalid arguements"}'));
+       }
+    break;
     default:
       res.send(JSON.parse('{"error":"no (valid) arguements"}'));
     break;
