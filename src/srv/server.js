@@ -91,3 +91,37 @@ notifier.on('Generate QR', () => {
   const data = `http://${ip.address()}:${port}`                  // Save the ip and port as data
   open(`https://api.qrserver.com/v1/create-qr-code/?data=${data}&amp;size=100x100`)   // generate a qr code and show it
 });
+
+function covertObjectToBinary(obj) {
+  let output = '',
+      input = JSON.stringify(obj) // convert the json to string.
+  // loop over the string and convert each charater to binary string.
+  for (i = 0; i < input.length; i++) {
+      output += input[i].charCodeAt(0).toString(2) + " ";
+  }
+  return output.trimEnd();
+}
+
+function convertBinaryToObject(str) {
+  var newBin = str.split(" ");
+  var binCode = [];
+  for (i = 0; i < newBin.length; i++) {
+      binCode.push(String.fromCharCode(parseInt(newBin[i], 2)));
+  }
+  let jsonString = binCode.join("");
+  return JSON.parse(jsonString)
+}
+
+function objectToBase64(obj){
+  let bin = covertObjectToBinary(obj);
+  let buff = new Buffer(bin);
+  let enc = buff.toString('base64');
+  return enc;
+}
+
+function base64ToObject(str){
+  let buff = new Buffer(str, 'base64');
+  let bin = buff.toString('utf-8');
+  let obj = convertBinaryToObject(bin);
+  return obj;
+}
