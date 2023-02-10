@@ -12,15 +12,15 @@ const newAction = () => {
 
     const checkExists = (res)=>{
         if(res.hasOwnProperty(name)){
-            return console.error("action already exists with that name!")
+            return console.error("action already exists with that name!")   // If another function already exists dont create a new one
         }
     }
     callEndpoint("api?action=getAll", checkExists);
 }
 
-function callEndpoint(endpoint, _callback=()=>{}) {
+const callEndpoint = (endpoint, _callback=()=>{}) => {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    xhttp.onreadystatechange = () => {
         if (this.readyState == 4 && this.status == 200) {
             let response = this.responseText;
             _callback(response)
@@ -31,7 +31,7 @@ function callEndpoint(endpoint, _callback=()=>{}) {
 }
 
 
-function covertObjectToBinary(obj) {
+const covertObjectToBinary = (obj) => {
     let output = '',
         input = JSON.stringify(obj) // convert the json to string.
     // loop over the string and convert each charater to binary string.
@@ -41,7 +41,7 @@ function covertObjectToBinary(obj) {
     return output.trimEnd();
 }
   
-function convertBinaryToObject(str) {
+const convertBinaryToObject = (str) => {
     var newBin = str.split(" ");
     var binCode = [];
     for (i = 0; i < newBin.length; i++) {
@@ -51,13 +51,13 @@ function convertBinaryToObject(str) {
     return JSON.parse(jsonString)
 }
   
-function objectToBase64(obj){
+const objectToBase64 = (obj) => {
     let bin = covertObjectToBinary(obj);
     let enc = btoa(bin)
     return enc;
 }
   
-function base64ToObject(str){
+const base64ToObject = (str) => {
     let bin = atob(str)
     let obj = convertBinaryToObject(bin);
     return obj;
