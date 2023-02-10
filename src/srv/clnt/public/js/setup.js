@@ -12,7 +12,6 @@ const newAction = () => {
     const func = eval(document.getElementById("action_func").value)
 
     const obj = new action(name, func);                                     // Create an object
-    const b64 = objectToBase64(obj);
 
     const log = (res) => {
         console.log(res)
@@ -23,7 +22,7 @@ const newAction = () => {
         if(res.hasOwnProperty(name)){
             return console.error("action already exists with that name!")   // If another function already exists dont create a new one
         }
-        callEndpoint(`api?action=set&key=${name}&value=${b64}`, log);
+        callEndpoint(`api?action=set&key=${name}&value=${obj.func.toString()}`, log);
     }
 
     callEndpoint("api?action=getAll", checkExists);

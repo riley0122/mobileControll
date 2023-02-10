@@ -71,6 +71,15 @@ app.get('/api', async(req, res) => {
        if(req.query.key!=""){                            // Check if key is set
         if (fs.existsSync(path)) {
           fs.readFile(path, 'utf-8', (e, data) => {
+            data = JSON.parse(data);
+            act = data[req.query.key]
+            const run = eval(act)
+            try {
+              run()
+              res.send(JSON.parse('{"msg": "Succes!", "s":0}'))
+            } catch (error) {
+              res.send(JSON.parse(`{"msg": "Something went wrong", "s":1, "error": "${error}"}`))
+            }
             
           })
         }else{
