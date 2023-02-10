@@ -7,22 +7,33 @@ class action{
 }
 
 const newAction = () => {
+    console.log("getting")
     const name = document.getElementById("action_name").value;
     const func = eval(document.getElementById("action_func").value)
 
+    const obj = new action(name, func);                                     // Create an object
+    const b64 = objectToBase64(obj);
+
+    const log = (res) => {
+        console.log(res)
+    }
+
     const checkExists = (res)=>{
+        console.log(res)
         if(res.hasOwnProperty(name)){
             return console.error("action already exists with that name!")   // If another function already exists dont create a new one
         }
+        callEndpoint(`api?action=set&key=${name}&value=${b64}`, log);
     }
+
     callEndpoint("api?action=getAll", checkExists);
 }
 
-const callEndpoint = (endpoint, _callback=()=>{}) => {
+function callEndpoint(endpoint, _callback=()=>{}){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {
-        if (this.readyState == 4 && this.status == 200) {
-            let response = this.responseText;
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            let response = xhttp.responseText;
             _callback(response)
         }
     };
