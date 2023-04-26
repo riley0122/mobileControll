@@ -7,7 +7,7 @@ const path = require("path")
 
 const app = new express();                               // Initialises express
 
-const { port } = require('./config/ServerConfig.json');  // Get the port from the server config
+const { port, auth } = require('./config/ServerConfig.json');  // Get the port from the server config
 
 app.use('', express.static(path.join(__dirname, '/clnt/public')))         // Includes the public folder
 
@@ -25,6 +25,13 @@ app.get('/setup', (req, res) => {
 // saving settings in a file
 
 app.get('/api', async(req, res) => {
+  if(auth != ""){
+    if(req.query.auth != auth){
+      res.status(401);
+      res.send("not allowed!");
+      return;
+    }
+  }
   let path = 'config/UserSettings.json'                  // The relative path to the user settings
   switch (req.query.action) {
     case "getAll":                                       // Gets all user settings
