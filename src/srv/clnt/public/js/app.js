@@ -31,3 +31,4 @@ const saveAuth = () => {
 }
 
 document.getElementById("auth").value = getCookie("auth");
+
