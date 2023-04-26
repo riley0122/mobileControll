@@ -22,13 +22,13 @@ const newAction = () => {
         if(res.hasOwnProperty(name)){
             return console.error("action already exists with that name!")   // If another function already exists dont create a new one
         }
-        callEndpoint(`api?action=set&key=${name}&value=${obj.func.toString()}`, log);
+        callEndpoint(`api?action=set&key=${name}&value=${obj.func.toString()}`,document.getElementById("auth").value , log);
     }
 
-    callEndpoint("api?action=getAll", checkExists);
+    callEndpoint("api?action=getAll", document.getElementById("auth").value, checkExists);
 }
 
-function callEndpoint(endpoint, _callback=()=>{}){
+function callEndpoint(endpoint, auth, _callback=()=>{}){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = () => {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -36,7 +36,7 @@ function callEndpoint(endpoint, _callback=()=>{}){
             _callback(response)
         }
     };
-    xhttp.open("GET", `${window.location.origin}/${endpoint}`, true);
+    xhttp.open("GET", `${window.location.origin}/${endpoint}&auth=${auth}`, true);
     xhttp.send();
 }
 
