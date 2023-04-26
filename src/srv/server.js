@@ -7,7 +7,7 @@ const path = require("path")
 
 const app = new express();                               // Initialises express
 
-const { port } = require('./config/ServerConfig.json');  // Get the port from the server config
+const { port, auth } = require('./config/ServerConfig.json');  // Get the port from the server config
 
 app.use('', express.static(path.join(__dirname, '/clnt/public')))         // Includes the public folder
 
@@ -25,6 +25,13 @@ app.get('/setup', (req, res) => {
 // saving settings in a file
 
 app.get('/api', async(req, res) => {
+  if(auth != ""){
+    if(req.query.auth != auth){
+      res.status(401);
+      res.send(JSON.parse("{\"msg\": \"401: Not allowed!\"}"));
+      return;
+    }
+  }
   let path = 'config/UserSettings.json'                  // The relative path to the user settings
   switch (req.query.action) {
     case "getAll":                                       // Gets all user settings
@@ -114,37 +121,3 @@ notifier.on('open setup', () => {                         // When the button to 
 notifier.on('open', () => {
   open(`http://${ip.address()}:${port}`)                  // When the open buttin is pressed it opens the site
 });
-
-function covertObjectToBinary(obj) {
-  let output = '',
-      input = JSON.stringify(obj) // convert the json to string.
-  // loop over the string and convert each charater to binary string.
-  for (i = 0; i < input.length; i++) {
-      output += input[i].charCodeAt(0).toString(2) + " ";
-  }
-  return output.trimEnd();
-}
-
-function convertBinaryToObject(str) {
-  var newBin = str.split(" ");
-  var binCode = [];
-  for (i = 0; i < newBin.length; i++) {
-      binCode.push(String.fromCharCode(parseInt(newBin[i], 2)));
-  }
-  let jsonString = binCode.join("");
-  return JSON.parse(jsonString)
-}
-
-function objectToBase64(obj){
-  let bin = covertObjectToBinary(obj);
-  let buff = new Buffer(bin);
-  let enc = buff.toString('base64');
-  return enc;
-}
-
-function base64ToObject(str){
-  let buff = new Buffer(str, 'base64');
-  let bin = buff.toString('utf-8');
-  let obj = convertBinaryToObject(bin);
-  return obj;
-}
