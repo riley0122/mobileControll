@@ -134,3 +134,6 @@ dist
 
 # Ignore the user settings
 UserSettings.json
+
+# ignore nodejs packages
+*/node_modules
