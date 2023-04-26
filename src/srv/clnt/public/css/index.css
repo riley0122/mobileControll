@@ -18,3 +18,22 @@ body{
 	border: none;
 	margin: 5px;
 }
+
+#container{
+	text-align: center;
+}
+
+.action{
+	width: 80%;
+	height: 50px;
+	border: none;
+	border-radius: 30px;
+	background-color: #050545;
+	color: lightgray;
+	transition: 0.2s cubic-bezier(.17,.67,.83,.67);
+}
+
+.action:active{
+	background-color: aquamarine;
+	color: black;
+}
