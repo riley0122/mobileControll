@@ -28,7 +28,7 @@ app.get('/api', async(req, res) => {
   if(auth != ""){
     if(req.query.auth != auth){
       res.status(401);
-      res.send("not allowed!");
+      res.send(JSON.parse("{msg: \"401: Not allowed!\"}"));
       return;
     }
   }
