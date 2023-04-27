@@ -1,5 +1,7 @@
+<img src="mobilecontroll-logo.png" alt= “logo” width="auto" height="400">
 # mobileControll
 With mobileControll you can controll your computer from any device
 
-## how to run
-you can run mobileControll by running server.js with node and going to your pc's ip at the port.
+## how to install
+download install.bat from releases, then run it.
+it should automatically run, also once your pc connects to internet.
