@@ -3,6 +3,7 @@
 where git >nul 2>&1
 if %errorlevel% neq 0 (
   echo Error: Git is not installed. Please install Git and try again.
+  pause
   exit /b 1
 )
 
