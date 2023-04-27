@@ -1,6 +1,8 @@
 @echo off
 setlocal
 
+REM temporary solution, gonna make it in c#
+
 where node >nul 2>&1
 if %ERRORLEVEL% equ 0 (
   echo Node.js is installed

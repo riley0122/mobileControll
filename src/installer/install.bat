@@ -13,6 +13,6 @@ git clone https://github.com/lucasammer/mobileControll.git
 cd mobileControll\src\srv
 npm install
 
-schtasks /create /tn "mobilecontroll" /tr "%appdata%\LucasAmmer\mobilecontroll\src\srv\run.bat" /sc onevent /ec Microsoft-Windows-NetworkProfile/Operational /mo *[System[(EventID=10000)]]
+schtasks /create /tn "mobilecontroll" /tr "%appdata%\mobilecontroll\src\srv\run.bat" /sc onevent /ec Microsoft-Windows-NetworkProfile/Operational /mo *[System[(EventID=10000)]]
 
 start run
