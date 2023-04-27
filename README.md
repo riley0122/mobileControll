@@ -1,4 +1,4 @@
-<img src="mobilecontroll-logo.png" alt= “logo” width="auto" height="400">
+<img src="mobilecontroll-logo.png" alt= “logo” width="auto" height="400"></img>
 # mobileControll
 With mobileControll you can controll your computer from any device
 
