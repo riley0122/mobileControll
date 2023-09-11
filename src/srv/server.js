@@ -11,6 +11,11 @@ const { port, auth } = require('./config/ServerConfig.json');  // Get the port f
 
 app.use('', express.static(path.join(__dirname, '/clnt/public')))         // Includes the public folder
 
+app.use((req, res, next) => {
+  res.removeHeader("X-Powered-By");
+  next();
+});
+
 
 // standard pages
 
